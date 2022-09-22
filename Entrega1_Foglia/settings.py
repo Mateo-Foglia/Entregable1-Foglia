@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     #Mis aplicaciones
-    'pagina_entregable'
+    'AppPagEntreg'
 ]
 
 MIDDLEWARE = [

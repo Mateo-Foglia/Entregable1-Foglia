@@ -21,8 +21,8 @@
         <nav class="navbar navbar-light bg-light static-top">
             <div class="container">
                 <a class="navbar-brand" href="{% url 'Inicio' %}">Inicio</a>
-                <a class="navbar-brand" href="{% url 'Entregables' %}">Añadir categorías</a>
-                <a class="navbar-brand" href="{% url 'Entregables' %}">Buscar categorías</a>
+                <a class="navbar-brand" href="{% url 'Añadir categorías' %}">Añadir categorías</a>
+                <a class="navbar-brand" href="{% url 'Añadir categorías' %}">Buscar categorías</a>
             </div>
         </nav>
         <!-- Masthead-->
@@ -33,7 +33,7 @@
                         <div class="text-center text-white">
                             <!-- Page heading-->
                             <h1 class="mb-5">
-                                {% block contenidoModificable %}
+                                {% block titulo %}
                                 
                                 {% endblock %}
                             </h1>
@@ -55,30 +55,13 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-6 h-100 text-center text-lg-start my-auto">
-                        <ul class="list-inline mb-2">
-                            <li class="list-inline-item"><a href="#!">About</a></li>
-                            <li class="list-inline-item">⋅</li>
-                            <li class="list-inline-item"><a href="#!">Contact</a></li>
-                            <li class="list-inline-item">⋅</li>
-                            <li class="list-inline-item"><a href="#!">Terms of Use</a></li>
-                            <li class="list-inline-item">⋅</li>
-                            <li class="list-inline-item"><a href="#!">Privacy Policy</a></li>
+                        {% block footer %}
+
+
+                        {% endblock %}
                         </ul>
                         <p class="text-muted small mb-4 mb-lg-0">&copy; Your Website 2022. All Rights Reserved.</p>
-                    </div>
-                    <div class="col-lg-6 h-100 text-center text-lg-end my-auto">
-                        <ul class="list-inline mb-0">
-                            <li class="list-inline-item me-4">
-                                <a href="#!"><i class="bi-facebook fs-3"></i></a>
-                            </li>
-                            <li class="list-inline-item me-4">
-                                <a href="#!"><i class="bi-twitter fs-3"></i></a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href="#!"><i class="bi-instagram fs-3"></i></a>
-                            </li>
-                        </ul>
-                    </div>
+                    </div>                    
                 </div>
             </div>
         </footer>
