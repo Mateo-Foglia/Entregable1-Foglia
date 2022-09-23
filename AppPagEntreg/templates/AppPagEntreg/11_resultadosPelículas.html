@@ -6,7 +6,7 @@
 
 {% block titulo %}
 
-    Buscar libros
+    Buscar películas
 
 {% endblock %}
 
@@ -15,15 +15,15 @@
 
 {% block footer %}
 
-    <p>Los libros con puntaje "{{puntaje}}" son:</p>
+    <p>Las películas con puntaje "{{puntaje}}" son:</p>
 
-    {% if libros %}
+    {% if pelis %}
 
         <ul>
 
-        {% for libro in libros %}
+        {% for peli in pelis %}
 
-            <li> {{libro.titulo}}: {{libro.puntaje}} </li>
+            <li> {{peli.titulo}}: {{peli.puntaje}} </li>
 
         {% endfor %}
 

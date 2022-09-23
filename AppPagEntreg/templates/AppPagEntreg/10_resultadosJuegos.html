@@ -6,7 +6,7 @@
 
 {% block titulo %}
 
-    Buscar libros
+    Buscar juegos
 
 {% endblock %}
 
@@ -15,15 +15,15 @@
 
 {% block footer %}
 
-    <p>Los libros con puntaje "{{puntaje}}" son:</p>
+    <p>Los juegos con puntaje "{{puntaje}}" son:</p>
 
-    {% if libros %}
+    {% if juegos %}
 
         <ul>
 
-        {% for libro in libros %}
+        {% for juego in juegos %}
 
-            <li> {{libro.titulo}}: {{libro.puntaje}} </li>
+            <li> {{juego.nombre}}: {{juego.puntaje}} </li>
 
         {% endfor %}
 

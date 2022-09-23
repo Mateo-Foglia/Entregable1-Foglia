@@ -12,6 +12,9 @@ def inicio(request):
 
 # Funciones que permiten agregar datos
 
+
+
+
 def addLibro(request):
 
       if request.method == 'POST':
@@ -35,6 +38,8 @@ def addLibro(request):
             miFormulario= FormularioLibros()
 
       return render(request, "AppPagEntreg/3_addLibro.html", {"miFormulario":miFormulario})
+
+
 
 
 def addJuego(request):
@@ -101,13 +106,12 @@ def getLibro(request):
     return render(request, "AppPagEntreg/6_getLibro.html")
 
 
-def buscar(request):
+def buscarLibro(request):
     
     if request.GET["Puntaje"]:
-
-        #respuesta = f"Estoy buscando los puntajes: {request.GET['Puntaje']}"
+        
         puntaje = request.GET["Puntaje"]
-        libros = Libros.objects.filter(puntaje__icontains=puntaje)
+        libros = Libros.objects.filter(puntaje__iexact=puntaje)
         
         return render(request, "AppPagEntreg/9_resultadosLibros.html", {"libros":libros, "puntaje":puntaje})
     
@@ -120,12 +124,46 @@ def buscar(request):
 
 
 
-
-
-
 def getJuego(request):
+
     return render(request, "AppPagEntreg/8_getJuego.html")
 
 
+def buscarJuego(request):
+
+      if request.GET["Puntaje"]:
+
+            puntaje = request.GET["Puntaje"]
+            juegos = Juegos.objects.filter(puntaje__iexact=puntaje)
+
+            return render(request, "AppPagEntreg/10_resultadosJuegos.html", {"juegos":juegos, "puntaje":puntaje})
+
+      else:
+
+            respuesta = "Tenés que ingresar datos."
+
+            return HttpResponse(respuesta)
+
+
+
+
+
 def getPeli(request):
+
     return render(request, "AppPagEntreg/7_getPeli.html")
+
+
+def buscarPeli(request):
+
+      if request.GET["Puntaje"]:
+
+            puntaje = request.GET["Puntaje"]
+            pelis = Peliculas.objects.filter(puntaje__iexact=puntaje)
+
+            return render(request, "AppPagEntreg/11_resultadosPelículas.html", {"pelis":pelis, "puntaje":puntaje})
+
+      else:
+
+            respuesta = "Tenés que ingresar datos."
+
+            return HttpResponse(respuesta)
