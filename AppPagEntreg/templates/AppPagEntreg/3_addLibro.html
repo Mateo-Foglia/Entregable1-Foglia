@@ -6,12 +6,29 @@
 
 {% block titulo %}
 
-Libros
+Añadir libros
 
 {% endblock %}
 
 {% block footer %}
 
 Aquí podrás agregar categorías de libros.
+<br>
+<br>
+<br>
+
+<form action="/AppPagEntreg/addLibro/" method="POST">{% csrf_token %}
+
+    <p>Título: <input type="text" name="Título"></p>
+    <p>Autor: <input type="text" name="Autor"></p></p>
+    <p>Género: <input type="text" name="Género"></p></p>
+    <input type="submit" name="Añadir">
+
+
+</form>
+
+
+
+
 
 {% endblock %}

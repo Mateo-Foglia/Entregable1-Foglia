@@ -6,12 +6,24 @@
 
 {% block titulo %}
 
-Juegos
+Añadir juegos
 
 {% endblock %}
 
 {% block footer %}
 
 Aquí podrás agregar categorías de juegos.
+<br>
+<br>
+<br>
+
+<form action="/AppPagEntreg/addJuego/" method="POST">{% csrf_token %}
+
+    <p>Nombre: <input type="text" name="Nombre"></p>
+    <p>Género: <input type="text" name="Género"></p></p>
+    <input type="submit" name="Añadir">
+
+
+</form>
 
 {% endblock %}

@@ -9,24 +9,45 @@ def inicio(request):
 
 
 def addLibro(request):
+
+    if request.method == "POST":
+
+        libro = Libros(titulo=request.POST["Título"], autor=request.POST["Autor"], genero=request.POST["Género"])
+        libro.save()
+        return render(request, "AppPagEntreg/2_Inicio.html")
+
     return render(request, "AppPagEntreg/3_addLibro.html")
 
 
 def addJuego(request):
-    pass
+    
+    if request.method == "POST":
+
+        juego = Juegos(nombre=request.POST["Nombre"], genero=request.POST["Género"])
+        juego.save()
+        return render(request, "AppPagEntreg/2_Inicio.html")
+
+    return render(request, "AppPagEntreg/5_addJuego.html")
 
 
 def addPeli(request):
-    pass
+
+    if request.method == "POST":
+
+        peli = Peliculas(titulo=request.POST["Título"], duracion=request.POST["Duración"], genero=request.POST["Género"])
+        peli.save()
+        return render(request, "AppPagEntreg/2_Inicio.html")
+
+    return render(request, "AppPagEntreg/4_addPeli.html")
 
 
 def getLibro(request):
-    pass
+    return render(request, "AppPagEntreg/6_getLibro.html")
 
 
 def getJuego(request):
-    pass
+    return render(request, "AppPagEntreg/8_getJuego.html")
 
 
 def getPeli(request):
-    pass
+    return render(request, "AppPagEntreg/7_getPeli.html")

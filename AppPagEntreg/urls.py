@@ -3,10 +3,10 @@ from AppPagEntreg.views import *
 
 urlpatterns = [
     path('', inicio, name="Inicio"),
-    path('formularioAdd/', addJuego, name="Añadir juegos"),
-    path('formularioAdd/', addLibro, name="Añadir libros"),
-    path('formularioAdd/', addPeli, name="Añadir películas"),
-    path('formularioGet', getJuego, name="Buscar juegos"),
-    path('formularioGet', getLibro, name="Buscar libros"),
-    path('formularioGet', getPeli, name="Buscar películas"),
+    path('addJuego/', addJuego, name="Añadir juegos"),
+    path('addLibro/', addLibro, name="Añadir libros"),
+    path('addPeli/', addPeli, name="Añadir películas"),
+    path('getJuego', getJuego, name="Buscar juegos"),
+    path('getLibro', getLibro, name="Buscar libros"),
+    path('getPeli', getPeli, name="Buscar películas"),
 ]

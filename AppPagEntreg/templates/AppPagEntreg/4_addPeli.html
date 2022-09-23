@@ -6,12 +6,25 @@
 
 {% block titulo %}
 
-Películas
+Añadir películas
 
 {% endblock %}
 
 {% block footer %}
 
 Aquí podrás agregar categorías de películas.
+<br>
+<br>
+<br>
+
+<form action="/AppPagEntreg/addPeli/" method="POST">{% csrf_token %}
+
+    <p>Título: <input type="text" name="Título"></p>
+    <p>Duración: <input type="number" name="Duración"></p></p>
+    <p>Género: <input type="text" name="Género"></p></p>
+    <input type="submit" name="Añadir">
+
+
+</form>
 
 {% endblock %}
