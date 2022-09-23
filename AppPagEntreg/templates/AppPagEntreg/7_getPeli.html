@@ -13,5 +13,10 @@ Buscar películas
 {% block footer %}
 
 Aquí podrás buscar películas.
+<br>
+<br>
+<br>
+<form action="/AppPagEntreg/resultados/" method="GET">{% csrf_token %}
 
+</form>
 {% endblock %}

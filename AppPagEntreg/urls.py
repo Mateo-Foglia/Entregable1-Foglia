@@ -6,7 +6,8 @@ urlpatterns = [
     path('addJuego/', addJuego, name="Añadir juegos"),
     path('addLibro/', addLibro, name="Añadir libros"),
     path('addPeli/', addPeli, name="Añadir películas"),
-    path('getJuego', getJuego, name="Buscar juegos"),
-    path('getLibro', getLibro, name="Buscar libros"),
-    path('getPeli', getPeli, name="Buscar películas"),
+    path('getJuego/', getJuego, name="Buscar juegos"),
+    path('getLibro/', getLibro, name="Buscar libros"),
+    path('getPeli/', getPeli, name="Buscar películas"),
+    path('resultados/', resultados, name="resultados"),
 ]

@@ -13,5 +13,18 @@ Buscar libros
 {% block footer %}
 
 Aquí podrás buscar libros.
+<br>
+<br>
+<br>
+
+<form action="/AppPagEntreg/resultados/" method="GET">{% csrf_token %}
+
+<input type="text" name="titulo" id="titulo">
+<input type="submit" value="Buscar">
+
+
+</form>
+
+
 
 {% endblock %}

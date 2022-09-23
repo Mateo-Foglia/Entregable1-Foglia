@@ -7,6 +7,9 @@ from AppPagEntreg.models import Libros, Peliculas, Juegos
 def inicio(request):
     return render(request, "AppPagEntreg/2_Inicio.html")
 
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+#Funciones para añadir información:
 
 def addLibro(request):
 
@@ -40,6 +43,9 @@ def addPeli(request):
 
     return render(request, "AppPagEntreg/4_addPeli.html")
 
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+#Funciones para buscar información:
 
 def getLibro(request):
     return render(request, "AppPagEntreg/6_getLibro.html")
@@ -51,3 +57,21 @@ def getJuego(request):
 
 def getPeli(request):
     return render(request, "AppPagEntreg/7_getPeli.html")
+
+
+def resultados(request):
+
+    if request.GET["titulo"]:
+
+        busqueda = request.GET["titulo"]
+        libro = Libros.objects.filter(titulo_iexact=busqueda)
+
+        return render(request, "AppPagEntreg/9_Resultados.html", {"libro":libro, "busqueda":busqueda})
+
+    else:
+        
+        respuesta = "Ingresá algún dato para que funcione."
+
+
+    return HttpResponse(respuesta)
+
