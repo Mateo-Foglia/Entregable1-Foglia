@@ -8,9 +8,25 @@ def inicio(request):
     return render(request, "AppPagEntreg/2_Inicio.html")
 
 
-def formularioAdd(request):
+def addLibro(request):
+    return render(request, "AppPagEntreg/3_addLibro.html")
+
+
+def addJuego(request):
     pass
 
 
-def formularioGet(request):
+def addPeli(request):
+    pass
+
+
+def getLibro(request):
+    pass
+
+
+def getJuego(request):
+    pass
+
+
+def getPeli(request):
     pass
