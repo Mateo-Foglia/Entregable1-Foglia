@@ -1,54 +1,126 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from AppPagEntreg.models import Libros, Peliculas, Juegos
+from AppPagEntreg.models import *
+from AppPagEntreg.forms import *
 
 # Create your views here.
 
 def inicio(request):
     return render(request, "AppPagEntreg/2_Inicio.html")
 
-#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#__________________________________________________________________________________________________________________________________________________________________________________________________________
 
-#Funciones para añadir información:
+# Funciones que permiten agregar datos
 
 def addLibro(request):
 
-    if request.method == "POST":
+      if request.method == 'POST':
 
-        libro = Libros(titulo=request.POST["Título"], autor=request.POST["Autor"], genero=request.POST["Género"])
-        libro.save()
-        return render(request, "AppPagEntreg/2_Inicio.html")
+            miFormulario = FormularioLibros(request.POST)
 
-    return render(request, "AppPagEntreg/3_addLibro.html")
+            print(miFormulario)
+
+            if miFormulario.is_valid:
+
+                  informacion = miFormulario.cleaned_data
+
+                  libro = Libros(titulo=informacion['Título'], puntaje=informacion['Puntaje']) 
+
+                  libro.save()
+
+                  return render(request, "AppPagEntreg/2_Inicio.html")
+
+      else: 
+
+            miFormulario= FormularioLibros()
+
+      return render(request, "AppPagEntreg/3_addLibro.html", {"miFormulario":miFormulario})
 
 
 def addJuego(request):
-    
-    if request.method == "POST":
 
-        juego = Juegos(nombre=request.POST["Nombre"], genero=request.POST["Género"])
-        juego.save()
-        return render(request, "AppPagEntreg/2_Inicio.html")
+      if request.method == 'POST':
 
-    return render(request, "AppPagEntreg/5_addJuego.html")
+            miFormulario = FormularioJuegos(request.POST)
+
+            print(miFormulario)
+
+            if miFormulario.is_valid:
+
+                  informacion = miFormulario.cleaned_data
+
+                  juego = Juegos(nombre=informacion['Nombre'], puntaje=informacion['Puntaje']) 
+
+                  juego.save()
+
+                  return render(request, "AppPagEntreg/2_Inicio.html")
+
+      else: 
+
+            miFormulario= FormularioJuegos()
+
+      return render(request, "AppPagEntreg/5_addJuego.html", {"miFormulario":miFormulario})
+
+
 
 
 def addPeli(request):
 
-    if request.method == "POST":
+      if request.method == 'POST':
 
-        peli = Peliculas(titulo=request.POST["Título"], duracion=request.POST["Duración"], genero=request.POST["Género"])
-        peli.save()
-        return render(request, "AppPagEntreg/2_Inicio.html")
+            miFormulario = FormularioPeliculas(request.POST)
 
-    return render(request, "AppPagEntreg/4_addPeli.html")
+            print(miFormulario)
 
-#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+            if miFormulario.is_valid:
 
-#Funciones para buscar información:
+                  informacion = miFormulario.cleaned_data
+
+                  pelis = Peliculas(titulo=informacion['Título'], puntaje=informacion['Puntaje']) 
+
+                  pelis.save()
+
+                  return render(request, "AppPagEntreg/2_Inicio.html")
+
+      else: 
+
+            miFormulario= FormularioPeliculas()
+
+      return render(request, "AppPagEntreg/4_addPeli.html", {"miFormulario":miFormulario})
+
+
+#__________________________________________________________________________________________________________________________________________________________________________________________________________
+
+#Funciones que permiten buscar datos
+
+
+
 
 def getLibro(request):
+
     return render(request, "AppPagEntreg/6_getLibro.html")
+
+
+def buscar(request):
+    
+    if request.GET["Puntaje"]:
+
+        #respuesta = f"Estoy buscando los puntajes: {request.GET['Puntaje']}"
+        puntaje = request.GET["Puntaje"]
+        libros = Libros.objects.filter(puntaje__icontains=puntaje)
+        
+        return render(request, "AppPagEntreg/9_resultadosLibros.html", {"libros":libros, "puntaje":puntaje})
+    
+    else:
+
+        respuesta = "Tenés que ingresar datos."
+
+        return HttpResponse(respuesta)
+
+
+
+
+
 
 
 def getJuego(request):
@@ -57,21 +129,3 @@ def getJuego(request):
 
 def getPeli(request):
     return render(request, "AppPagEntreg/7_getPeli.html")
-
-
-def resultados(request):
-
-    if request.GET["titulo"]:
-
-        busqueda = request.GET["titulo"]
-        libro = Libros.objects.filter(titulo_iexact=busqueda)
-
-        return render(request, "AppPagEntreg/9_Resultados.html", {"libro":libro, "busqueda":busqueda})
-
-    else:
-        
-        respuesta = "Ingresá algún dato para que funcione."
-
-
-    return HttpResponse(respuesta)
-

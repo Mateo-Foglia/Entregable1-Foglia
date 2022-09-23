@@ -10,20 +10,28 @@ Añadir juegos
 
 {% endblock %}
 
+
+
+
 {% block footer %}
 
-Aquí podrás agregar categorías de juegos.
+Aquí podrás agregar juegos y su puntaje.
 <br>
 <br>
 <br>
 
-<form action="/AppPagEntreg/addJuego/" method="POST">{% csrf_token %}
+<form action="" method="POST">{% csrf_token %}
 
-    <p>Nombre: <input type="text" name="Nombre"></p>
-    <p>Género: <input type="text" name="Género"></p></p>
-    <input type="submit" name="Añadir">
+<table>
+    {{miFormulario.as_table}}
+</table>
 
+<input type="submit", value="Enviar">
 
 </form>
+
+
+
+
 
 {% endblock %}

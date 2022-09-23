@@ -10,21 +10,43 @@ Buscar libros
 
 {% endblock %}
 
+
+
+
 {% block footer %}
 
-Aquí podrás buscar libros.
-<br>
-<br>
-<br>
+Aquí podrás buscar libros por su puntaje.
 
-<form action="/AppPagEntreg/resultados/" method="GET">{% csrf_token %}
 
-<input type="text" name="titulo" id="titulo">
-<input type="submit" value="Buscar">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+<form action="/AppPagEntreg/buscar/" method="GET">
+
+    <input type="number" name="Puntaje" id="Puntaje">
+
+    <input type="submit" value="Buscar">
+
+
+
+
 
 
 </form>
 
 
+
+
+
+
+</body>
+</html>
 
 {% endblock %}

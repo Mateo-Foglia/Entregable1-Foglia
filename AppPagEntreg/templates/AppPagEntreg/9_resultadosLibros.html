@@ -1,0 +1,15 @@
+<p>Estamos buscando libros con el puntaje: "{{puntaje}}"</p>
+
+{% if libros %}
+
+<ul>
+
+{% for libro in libros %}
+
+    <li> {{libro.titulo}}: {{libro.puntaje}} </li>
+
+{% endfor %}
+
+</ul>
+
+{% endif %}
