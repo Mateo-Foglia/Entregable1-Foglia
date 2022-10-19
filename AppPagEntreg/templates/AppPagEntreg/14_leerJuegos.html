@@ -14,7 +14,9 @@
 
         <p>Nombre: {{juego.nombre}}</p>
         <p>Puntaje: {{juego.puntaje}}</p>
-            
+        <br>
+        <button> <a href="{% url 'Editar juegos' juego.nombre %}">Editar juego</a> </button> <button> <a href="{% url 'Eliminar juegos' juego.nombre %}">Eliminar juego</a> </button>
+        <br>
         ------------------------------
 
     {% endfor %}

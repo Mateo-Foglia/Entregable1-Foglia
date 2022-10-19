@@ -212,8 +212,33 @@ def eliminarPelis(request, peliTitulo):
       return render(request, "AppPagEntreg/12_leerPelis.html", contexto)
 
 
+def eliminarLibros(request, libroTitulo):
+
+      libro = Libros.objects.get(titulo=libroTitulo)
+      libro.delete()
+
+      libros = Libros.objects.all()
+
+      contexto = {"libros":libros}
+
+      return render(request, "AppPagEntreg/13_leerLibros.html", contexto)
+
+
+def eliminarJuegos(request, juegoNombre):
+
+      juego = Juegos.objects.get(nombre=juegoNombre)
+      juego.delete()
+
+      juegos = Juegos.objects.all()
+
+      contexto = {"juegos":juegos}
+
+      return render(request, "AppPagEntreg/14_leerJuegos.html", contexto)
+
 #_________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
 #Funciones que permiten modificar información
+
+
 
 def modificarPelis(request, peliTitulo):
 
@@ -239,3 +264,57 @@ def modificarPelis(request, peliTitulo):
             miFormulario = FormularioPeliculas(initial={"Título":pelicula.titulo, "Puntaje":pelicula.puntaje})
 
       return render(request, "AppPagEntreg/15_editarPelis.html", {"miFormulario":miFormulario, "titulo":peliTitulo})
+      
+
+
+def modificarLibros(request, libroTitulo):
+
+      libro = Libros.objects.get(titulo=libroTitulo)
+
+      if request.method == "POST":
+
+            miFormulario = FormularioLibros(request.POST)
+
+            if miFormulario.is_valid():
+
+                  informacion = miFormulario.cleaned_data
+
+                  libro.titulo = informacion["Título"]
+                  libro.puntaje = informacion["Puntaje"]
+
+                  libro.save()
+
+                  return render(request, "AppPagEntreg/2_Inicio.html")
+
+      else: 
+
+            miFormulario = FormularioLibros(initial={"Título":libro.titulo, "Puntaje":libro.puntaje})
+
+      return render(request, "AppPagEntreg/16_editarLibros.html", {"miFormulario":miFormulario, "titulo":libroTitulo})
+
+
+
+def modificarJuegos(request, juegoNombre):
+
+      juego = Juegos.objects.get(nombre=juegoNombre)
+
+      if request.method == "POST":
+
+            miFormulario = FormularioJuegos(request.POST)
+
+            if miFormulario.is_valid():
+
+                  informacion = miFormulario.cleaned_data
+
+                  juego.titulo = informacion["Nombre"]
+                  juego.puntaje = informacion["Puntaje"]
+
+                  juego.save()
+
+                  return render(request, "AppPagEntreg/2_Inicio.html")
+
+      else: 
+
+            miFormulario = FormularioJuegos(initial={"Nombre":juego.nombre, "Puntaje":juego.puntaje})
+
+      return render(request, "AppPagEntreg/17_editarJuegos.html", {"miFormulario":miFormulario, "nombre":juegoNombre})

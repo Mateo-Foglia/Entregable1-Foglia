@@ -14,6 +14,9 @@
 
         <p>Título: {{libro.titulo}}</p>
         <p>Puntaje: {{libro.puntaje}}</p>
+        <br>
+        <button> <a href="{% url 'Editar libros' libro.titulo %}">Editar libro</a> </button> <button> <a href="{% url 'Eliminar libros' libro.titulo %}">Eliminar libro</a> </button>
+        <br>
         ------------------------------
 
     {% endfor %}

@@ -21,7 +21,11 @@ urlpatterns = [
 
     #DELETE:
     path('eliminarPelis/<peliTitulo>/', eliminarPelis, name="Eliminar películas"),
+    path('eliminarLibros/<libroTitulo>/', eliminarLibros, name="Eliminar libros"),
+    path('eliminarJuegos/<juegoNombre>/', eliminarJuegos, name="Eliminar juegos"),
 
     #UPDATE:
     path('editarPelis/<peliTitulo>/', modificarPelis, name="Editar películas"),
+    path('editarLibros/<libroTitulo>/', modificarLibros, name="Editar libros"),
+    path('editarJuegos/<juegoNombre>/', modificarJuegos, name="Editar juegos"),
 ]
