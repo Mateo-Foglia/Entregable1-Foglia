@@ -12,5 +12,16 @@ urlpatterns = [
     path('buscarLibro/', buscarLibro),
     path('buscarJuego/', buscarJuego),
     path('buscarPeli/', buscarPeli),
-    path('leerTodo/', leerTodo),
+
+    #CRUD (salvo por la "C" que está en los distintos "add.."):
+    #READ:
+    path('leerPelis/', leerPelis, name="Ver todas las películas"),
+    path('leerLibros/', leerLibros, name="Ver todos los libros"),
+    path('leerJuegos/', leerJuegos, name="Ver todos los juegos"),
+
+    #DELETE:
+    path('eliminarPelis/<peliTitulo>/', eliminarPelis, name="Eliminar películas"),
+
+    #UPDATE:
+    path('editarPelis/<peliTitulo>/', modificarPelis, name="Editar películas"),
 ]

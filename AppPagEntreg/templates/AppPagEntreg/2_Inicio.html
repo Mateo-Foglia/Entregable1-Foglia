@@ -12,6 +12,9 @@
 
 {% block footer %}
 
-Para empezar, deberías darle click a alguna de las opciones de la parte superior.
-
+Para empezar, deberías darle click a alguna de las opciones de la parte superior, o dar click en "Ver todas las obras" para acceder a todas los libros, juegos, y películas almacenadas.
+<br>
+<br>
+<br>
+<a class="navbar-brand" href="{% url 'Ver todas las películas' %}">Ver todas las películas</a> - <a class="navbar-brand" href="{% url 'Ver todos los libros' %}">Ver todos los libros</a> - <a class="navbar-brand" href="{% url 'Ver todos los juegos' %}">Ver todos los juegos</a>
 {% endblock %}

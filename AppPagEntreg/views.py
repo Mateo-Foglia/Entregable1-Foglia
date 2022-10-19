@@ -77,7 +77,7 @@ def addPeli(request):
 
             print(miFormulario)
 
-            if miFormulario.is_valid:
+            if miFormulario.is_valid():
 
                   informacion = miFormulario.cleaned_data
 
@@ -169,15 +169,73 @@ def buscarPeli(request):
             return HttpResponse(respuesta)
 
 #____________________________________________________________________________________________________________________________________
-#Función que permite vizualizar todo el material almacenado
+#Funciones que permiten ver todos los libros/películas/juegos en una sola lista.
 
-def leerTodo(request):
+def leerPelis(request):
 
       pelis = Peliculas.objects.all()
-      juegos = Juegos.objects.all()
+
+      contexto = {"pelis":pelis}
+
+      return render(request, "AppPagEntreg/12_leerPelis.html", contexto)
+
+
+def leerLibros(request):
+
       libros = Libros.objects.all()
 
-      contexto = {"pelis":pelis, "juegos":juegos, "libros":libros}
+      contexto = {"libros":libros}
 
-      return render(request, "AppPagEntreg/12_leerTodo.html", contexto)
+      return render(request, "AppPagEntreg/13_leerLibros.html", contexto)
 
+
+def leerJuegos(request):
+
+      juegos = Juegos.objects.all()
+
+      contexto = {"juegos":juegos}
+
+      return render(request, "AppPagEntreg/14_leerJuegos.html", contexto)
+
+#____________________________________________________________________________________________________________________________________________________________________________________________
+#Funciones que permiten eliminar información
+
+def eliminarPelis(request, peliTitulo):
+
+      pelicula = Peliculas.objects.get(titulo=peliTitulo)
+      pelicula.delete()
+
+      pelis = Peliculas.objects.all()
+
+      contexto = {"pelis":pelis}
+
+      return render(request, "AppPagEntreg/12_leerPelis.html", contexto)
+
+
+#_________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
+#Funciones que permiten modificar información
+
+def modificarPelis(request, peliTitulo):
+
+      pelicula = Peliculas.objects.get(titulo=peliTitulo)
+
+      if request.method == "POST":
+
+            miFormulario = FormularioPeliculas(request.POST)
+
+            if miFormulario.is_valid():
+
+                  informacion = miFormulario.cleaned_data
+
+                  pelicula.titulo = informacion["Título"]
+                  pelicula.puntaje = informacion["Puntaje"]
+
+                  pelicula.save()
+
+                  return render(request, "AppPagEntreg/2_Inicio.html")
+
+      else: 
+
+            miFormulario = FormularioPeliculas(initial={"Título":pelicula.titulo, "Puntaje":pelicula.puntaje})
+
+      return render(request, "AppPagEntreg/15_editarPelis.html", {"miFormulario":miFormulario, "titulo":peliTitulo})
