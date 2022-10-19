@@ -15,7 +15,7 @@
 
 {% block footer %}
 
-    <p>Las películas con puntaje "{{puntaje}}" son:</p>
+    <p>Las películas con el nombre "{{titulo}}" son:</p>
 
     {% if pelis %}
 
@@ -23,7 +23,7 @@
 
         {% for peli in pelis %}
 
-            <li> {{peli.titulo}}: {{peli.puntaje}} </li>
+            <li> "{{peli.titulo}}", con una calificación de {{peli.puntaje}} puntos.</li>
 
         {% endfor %}
 

@@ -108,12 +108,12 @@ def getLibro(request):
 
 def buscarLibro(request):
     
-    if request.GET["Puntaje"]:
+    if request.GET["Título"]:
         
-        puntaje = request.GET["Puntaje"]
-        libros = Libros.objects.filter(puntaje__iexact=puntaje)
+        titulo = request.GET["Título"]
+        libros = Libros.objects.filter(titulo__icontains=titulo)
         
-        return render(request, "AppPagEntreg/9_resultadosLibros.html", {"libros":libros, "puntaje":puntaje})
+        return render(request, "AppPagEntreg/9_resultadosLibros.html", {"libros":libros, "titulo":titulo})
     
     else:
 
@@ -131,12 +131,12 @@ def getJuego(request):
 
 def buscarJuego(request):
 
-      if request.GET["Puntaje"]:
+      if request.GET["Nombre"]:
 
-            puntaje = request.GET["Puntaje"]
-            juegos = Juegos.objects.filter(puntaje__iexact=puntaje)
+            nombre = request.GET["Nombre"]
+            juegos = Juegos.objects.filter(nombre__icontains=nombre)
 
-            return render(request, "AppPagEntreg/10_resultadosJuegos.html", {"juegos":juegos, "puntaje":puntaje})
+            return render(request, "AppPagEntreg/10_resultadosJuegos.html", {"juegos":juegos, "nombre":nombre})
 
       else:
 
@@ -155,15 +155,29 @@ def getPeli(request):
 
 def buscarPeli(request):
 
-      if request.GET["Puntaje"]:
+      if request.GET["Título"]:
 
-            puntaje = request.GET["Puntaje"]
-            pelis = Peliculas.objects.filter(puntaje__iexact=puntaje)
+            titulo = request.GET["Título"]
+            pelis = Peliculas.objects.filter(titulo__icontains=titulo)
 
-            return render(request, "AppPagEntreg/11_resultadosPelículas.html", {"pelis":pelis, "puntaje":puntaje})
+            return render(request, "AppPagEntreg/11_resultadosPelículas.html", {"pelis":pelis, "titulo":titulo})
 
       else:
 
             respuesta = "Tenés que ingresar datos."
 
             return HttpResponse(respuesta)
+
+#____________________________________________________________________________________________________________________________________
+#Función que permite vizualizar todo el material almacenado
+
+def leerTodo(request):
+
+      pelis = Peliculas.objects.all()
+      juegos = Juegos.objects.all()
+      libros = Libros.objects.all()
+
+      contexto = {"pelis":pelis, "juegos":juegos, "libros":libros}
+
+      return render(request, "AppPagEntreg/12_leerTodo.html", contexto)
+

@@ -15,7 +15,7 @@
 
 {% block footer %}
 
-    <p>Los libros con puntaje "{{puntaje}}" son:</p>
+    <p>Los libros con el nombre "{{titulo}}" son:</p>
 
     {% if libros %}
 
@@ -23,7 +23,7 @@
 
         {% for libro in libros %}
 
-            <li> {{libro.titulo}}: {{libro.puntaje}} </li>
+            <li> "{{libro.titulo}}", con una calificación de {{libro.puntaje}} puntos.</li>
 
         {% endfor %}
 

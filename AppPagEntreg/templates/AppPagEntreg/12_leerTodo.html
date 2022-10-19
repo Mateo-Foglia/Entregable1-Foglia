@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    PEL&IacuteCULAS:
+    <br>
+    <br>
+    {% for peli in pelis %}
+
+        <p>Título: {{peli.titulo}}</p>
+        <p>Puntaje: {{peli.puntaje}}</p>
+        ------------------------------
+
+    {% endfor %}
+    <br>
+    <br>
+    ###################################################################################################################################################################################################
+    <br>
+    <br>
+    <br>
+    <br>
+    JUEGOS:
+    <br>
+    <br>
+    {% for juego in juegos %}
+
+        <p>Nombre: {{juego.nombre}}</p>
+        <p>Puntaje: {{juego.puntaje}}</p>
+            
+        ------------------------------
+
+    {% endfor %}
+    <br>
+    <br>
+    ###################################################################################################################################################################################################
+    <br>
+    <br>
+    <br>
+    <br>
+    LIBROS:
+    <br>
+    <br>
+    {% for libro in libros %}
+
+        <p>Título: {{libro.titulo}}</p>
+        <p>Puntaje: {{libro.puntaje}}</p>
+        ------------------------------
+
+    {% endfor %}
+</body>
+</html>

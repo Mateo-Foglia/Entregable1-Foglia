@@ -15,7 +15,7 @@
 
 {% block footer %}
 
-    <p>Los juegos con puntaje "{{puntaje}}" son:</p>
+    <p>Los juegos con el nombre "{{nombre}}" son:</p>
 
     {% if juegos %}
 
@@ -23,7 +23,7 @@
 
         {% for juego in juegos %}
 
-            <li> {{juego.nombre}}: {{juego.puntaje}} </li>
+            <li> "{{juego.nombre}}", con una calificaci&oacuten de {{juego.puntaje}} puntos.</li>
 
         {% endfor %}
 

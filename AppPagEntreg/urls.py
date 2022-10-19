@@ -12,4 +12,5 @@ urlpatterns = [
     path('buscarLibro/', buscarLibro),
     path('buscarJuego/', buscarJuego),
     path('buscarPeli/', buscarPeli),
+    path('leerTodo/', leerTodo),
 ]
