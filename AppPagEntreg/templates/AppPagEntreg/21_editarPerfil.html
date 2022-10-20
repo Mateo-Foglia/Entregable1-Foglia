@@ -1,0 +1,27 @@
+{% extends "AppPagEntreg/1_Padre.html" %}
+
+
+{% load static %}
+
+
+{% block titulo %}
+
+Acá se edita el usuario.
+
+
+{% endblock %}
+
+{% block footer %}
+
+<form action="" method="POST">{% csrf_token %}
+
+    {{formulario.as_p}}
+
+    <button type="submit">Editar usuario</button>
+
+
+
+
+</form>
+
+{% endblock %}

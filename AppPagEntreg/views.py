@@ -2,14 +2,95 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from AppPagEntreg.models import *
 from AppPagEntreg.forms import *
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
 def inicio(request):
-    return render(request, "AppPagEntreg/2_Inicio.html")
+    return render(request, "AppPagEntreg/2_Inicio.html", {"mensaje":f"¡Bienvenido!"})
 
 #__________________________________________________________________________________________________________________________________________________________________________________________________________
+#Función de inicio de sesión y registro
 
+def inicioSesion(request):
+
+      if request.method == "POST":
+
+            form = AuthenticationForm(request, data = request.POST)
+
+            if form.is_valid():
+
+                  usuario = form.cleaned_data.get("username")
+                  contrasenia = form.cleaned_data.get("password")
+
+                  user = authenticate(username=usuario, password=contrasenia)
+
+                  if user:
+
+                        login(request, user)
+
+                        return render(request, "AppPagEntreg/2_Inicio.html", {"mensaje":f"¡Bienvenido, {user}!"})
+            
+            else:
+
+                  return render(request, "AppPagEntreg/2_Inicio.html", {"mensaje":f"Usuario o contraseña inválida."})
+      
+      else:
+
+            form = AuthenticationForm()
+      
+      return render(request, "AppPagEntreg/18_login.html", {"formulario":form})
+
+
+
+def registro(request):
+
+      if request.method == "POST":
+            
+            form = UsuarioRegistro(request.POST)
+
+            if form.is_valid():
+
+                  username = form.cleaned_data["username"]
+                  form.save()
+                  return render(request, "AppPagEntreg/2_Inicio.html", {"mensaje":"Usuario creado."})
+
+      else:
+
+            form = UsuarioRegistro()
+
+      return render(request, "AppPagEntreg/19_registro.html", {"formulario":form})
+
+@login_required
+def editarUsuario(request):
+
+      usuario = request.user
+
+      if request.method == "POST":
+
+            form = FormularioEditar(request.POST)
+
+            if form.is_valid():
+
+                  info = form.cleaned_data
+
+                  usuario.email = info["email"]
+                  usuario.set_password(info["password1"])
+                  usuario.first_name = info["first_name"]
+                  usuario.last_name = info["last_name"]
+
+                  usuario.save()
+
+                  return render(request, "AppPagEntreg/2_Inicio.html", {"mensaje":f"¡Hecho!"})
+      else:
+
+            form = FormularioEditar(initial={"email":usuario.email, "first_name":usuario.first_name, "last_name":usuario.last_name,})
+
+      return render(request, "AppPagEntreg/21_editarPerfil.html", {"formulario":form, "usuario":usuario})
+
+#__________________________________________________________________________________________________________________________________________________________________________________________________________
 # Funciones que permiten agregar datos
 
 
@@ -200,6 +281,8 @@ def leerJuegos(request):
 #____________________________________________________________________________________________________________________________________________________________________________________________
 #Funciones que permiten eliminar información
 
+
+@login_required
 def eliminarPelis(request, peliTitulo):
 
       pelicula = Peliculas.objects.get(titulo=peliTitulo)
@@ -212,6 +295,7 @@ def eliminarPelis(request, peliTitulo):
       return render(request, "AppPagEntreg/12_leerPelis.html", contexto)
 
 
+@login_required
 def eliminarLibros(request, libroTitulo):
 
       libro = Libros.objects.get(titulo=libroTitulo)
@@ -224,6 +308,7 @@ def eliminarLibros(request, libroTitulo):
       return render(request, "AppPagEntreg/13_leerLibros.html", contexto)
 
 
+@login_required
 def eliminarJuegos(request, juegoNombre):
 
       juego = Juegos.objects.get(nombre=juegoNombre)
@@ -239,7 +324,7 @@ def eliminarJuegos(request, juegoNombre):
 #Funciones que permiten modificar información
 
 
-
+@login_required
 def modificarPelis(request, peliTitulo):
 
       pelicula = Peliculas.objects.get(titulo=peliTitulo)
@@ -267,6 +352,7 @@ def modificarPelis(request, peliTitulo):
       
 
 
+@login_required
 def modificarLibros(request, libroTitulo):
 
       libro = Libros.objects.get(titulo=libroTitulo)
@@ -294,6 +380,7 @@ def modificarLibros(request, libroTitulo):
 
 
 
+@login_required
 def modificarJuegos(request, juegoNombre):
 
       juego = Juegos.objects.get(nombre=juegoNombre)

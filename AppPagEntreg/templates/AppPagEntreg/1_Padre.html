@@ -21,12 +21,26 @@
         <nav class="navbar navbar-light bg-light static-top">
             <div class="container">
                 <a class="navbar-brand" href="{% url 'Inicio' %}">Inicio</a>
-                <a class="navbar-brand" href="{% url 'Añadir juegos' %}">Añadir juegos</a>
+                <!--<a class="navbar-brand" href="{% url 'Añadir juegos' %}">Añadir juegos</a>
                 <a class="navbar-brand" href="{% url 'Añadir libros' %}">Añadir libros</a>
-                <a class="navbar-brand" href="{% url 'Añadir películas' %}">Añadir películas</a>
+                <a class="navbar-brand" href="{% url 'Añadir películas' %}">Añadir películas</a>-->
                 <a class="navbar-brand" href="{% url 'Buscar juegos' %}">Buscar juegos</a>
                 <a class="navbar-brand" href="{% url 'Buscar libros' %}">Buscar libros</a>
                 <a class="navbar-brand" href="{% url 'Buscar películas' %}">Buscar películas</a>
+
+                {% if request.user.is_authenticated%}
+
+                <a class="navbar-brand" href="{% url 'Editar Usuario' %}">Editar usuario</a>
+                <a class="navbar-brand" href="{% url 'Logout' %}">Cerrar sesi&oacuten</a>
+                
+                {% else %}
+
+                <a class="navbar-brand" href="{% url 'Login' %}">Iniciar sesi&oacuten</a>
+                <a class="navbar-brand" href="{% url 'SignUp' %}">Registrarse</a>
+                
+                {% endif %}
+
+                
             </div>
         </nav>
         <!-- Masthead-->

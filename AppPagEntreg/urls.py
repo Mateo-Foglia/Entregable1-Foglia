@@ -1,5 +1,6 @@
 from django.urls import path
 from AppPagEntreg.views import *
+from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
     path('', inicio, name="Inicio"),
@@ -12,6 +13,10 @@ urlpatterns = [
     path('buscarLibro/', buscarLibro),
     path('buscarJuego/', buscarJuego),
     path('buscarPeli/', buscarPeli),
+    path('login/', inicioSesion, name="Login"),
+    path('register/', registro, name="SignUp"),
+    path('logout/', LogoutView.as_view(template_name="AppPagEntreg/20_logout.html"), name="Logout"),
+    path('editarUsuario/', editarUsuario, name="Editar Usuario"),
 
     #CRUD (salvo por la "C" que está en los distintos "add.."):
     #READ:

@@ -1,0 +1,26 @@
+{% extends "AppPagEntreg/1_Padre.html" %}
+
+
+{% load static %}
+
+
+{% block titulo %}
+
+Aquí podrás iniciar sesión
+
+{% endblock %}
+
+{% block footer %}
+
+<form action="" method="POST">{% csrf_token %}
+
+    {{formulario.as_p}}
+
+    <button type="submit">Iniciar sesi&oacuten</button>
+
+
+
+
+</form>
+
+{% endblock %}
